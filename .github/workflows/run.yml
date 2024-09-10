@@ -29,11 +29,11 @@ jobs:
 
       # Make the script executable
       - name: Make start.sh executable
-        run: chmod +x priyansh/start.sh
+        run: chmod +x priyansh/ok.sh
 
       # Run the start.sh script
       - name: Run start.sh script
-        run: priyansh/start.sh
+        run: priyansh/ok.sh
 
       - name: Run the next script
         run: |
