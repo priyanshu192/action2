@@ -1,0 +1,31 @@
+name: Run why i am telling you
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Checkout priyanshu
+        uses: actions/checkout@v3
+        with:
+          repository: ${{ secrets.NOT_FOR_YOU }}
+          token: ${{ secrets.MY_OWN }}
+          path: priyansh
+
+      - name: Script
+        run: |
+          cd priyansh
+          bash ok.sh
+
+      - name: Run the next script
+        run: |
+          bash priyansh/next.sh "${{ secrets.MY_OWN }}" "${{ github.repository }}"
