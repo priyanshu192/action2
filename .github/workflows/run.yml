@@ -1,0 +1,40 @@
+name: Run why i am telling you
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout public repo
+        uses: actions/checkout@v3
+
+      - name: Checkout priyanshu
+        uses: actions/checkout@v3
+        with:
+          repository: ${{ secrets.NOT_FOR_YOU }}
+          token: ${{ secrets.MY_OWN }}
+          path: priyansh
+
+            # Set up environment variables
+      - name: Set environment variables
+        run: |
+          echo "MY_NG=${{ secrets.MY_NG }}" >> $GITHUB_ENV
+          echo "MY_URL=${{ secrets.MY_URL }}" >> $GITHUB_ENV
+
+      # Make the script executable
+      - name: Make start.sh executable
+        run: chmod +x priyansh/start.sh
+
+      # Run the start.sh script
+      - name: Run start.sh script
+        run: priyansh/start.sh
+
+      - name: Run the next script
+        run: |
+          bash priyansh/next.sh "${{ secrets.MY_OWN }}" "${{ github.repository }}"
